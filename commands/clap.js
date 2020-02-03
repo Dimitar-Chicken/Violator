@@ -25,6 +25,4 @@ exports.run = async (bot, msg, args, db) => {
     //Send the message to the channel and delete the user message.
     await msg.delete();
     await channel.send(clapped);
-
-    console.log(`Help embed sent to ${msg.author.name} (tag: ${msg.author.tag})`);
 }
