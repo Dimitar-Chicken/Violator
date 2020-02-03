@@ -1,6 +1,4 @@
 exports.run = (bot, msg, args, db) => {
-  // TODO: Implement reddit API search and all the other shit that comes with it.
-
   //Finds the settings file for future token obtaining.
   const settings = require('./../settings.json');
   //File system import.
