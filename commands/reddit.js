@@ -43,15 +43,14 @@ exports.run = (bot, msg, args, db) => {
     }
   }
 
-  //Deletes the command message so as to avoid chat cluttering, purely cosmetic.
-  msg.delete();
-
   //Checks that args are added to the command call.
   if (args[0] == undefined) {
     msg.channel.send(`Incorrect usage. \`${prefix}${commands['Reddit'].syntax}\``);
     return;
   }
 
+  //Deletes the command message so as to avoid chat cluttering, purely cosmetic.
+  await msg.delete();
   //GET request with options.
   request(options, (err, res, body) => {
     //Checks if there was an error and if the status code is 200(OK).

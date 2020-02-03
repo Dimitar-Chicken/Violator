@@ -77,12 +77,12 @@ exports.run = (bot, msg, args, db) => {
     console.log(`Help embed sent to ${msg.author.name} (tag: ${msg.author.tag})`);
 
     //Deletes the command message so as to avoid chat cluttering, purely cosmetic.
-    msg.delete();
+    await msg.delete();
 
     //Chat message to notify user where to find help.
     msg.channel.send('I have sent a help message in Direct Messages.').then(msg => {
       setTimeout(function () {
-        msg.delete();
+        await msg.delete();
       }, 4500);
     });
   }
