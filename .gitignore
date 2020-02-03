@@ -1,0 +1,5 @@
+node_modules
+settings.json
+commands/spam.js
+data
+.vscode
