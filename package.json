@@ -8,6 +8,7 @@
     "discord.js": "^11.5.1",
     "follow-redirects": "^1.10.0",
     "g": "^2.0.1",
+    "jest": "^25.1.0",
     "lowdb": "^1.0.0",
     "nodemon": "^1.19.4",
     "pstree.remy": "^1.1.7",
