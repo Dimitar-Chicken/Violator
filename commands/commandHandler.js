@@ -1,5 +1,5 @@
 exports.run = (bot, message, db) => {
-    const default_prefix = require('../settings.json');
+    const {default_prefix} = require('../settings.json');
     let prefix;
 
     if (!message.guild) {
