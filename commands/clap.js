@@ -1,11 +1,9 @@
-exports.run = async (bot, msg, args, db) => {
+exports.run = async (bot, prefix, msg, args, db) => {
 
     //File system import.
     const fs = require('fs');
     //Imports the command information file.
     const commands = JSON.parse(fs.readFileSync('./commands/commands.json', 'utf8'));
-
-    const prefix = db.get(`servers.${msg.guild.id}_prefix`).value();
 
     const channel = msg.channel;
 

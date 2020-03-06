@@ -1,12 +1,10 @@
-exports.run = (bot, msg, args, db) => {
+exports.run = (bot, prefix, msg, args, db) => {
   //Finds the settings file for future token obtaining.
   const settings = require('./../settings.json');
   //File system import.
   const fs = require('fs');
   //Imports the command information file.
   const commands = JSON.parse(fs.readFileSync('./commands/commands.json', 'utf8'));
-  //Retrieves the prefix from the DB
-  const prefix = db.get(`servers.${msg.guild.id}_prefix`).value();
 
   //Request package to handle our HTTPS requests.
   const request = require('request');
