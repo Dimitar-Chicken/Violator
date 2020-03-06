@@ -1,0 +1,32 @@
+{
+  "name": "violator",
+  "version": "1.0.0",
+  "description": "A Discord bot with various functionality like searching Imgur API and mass message deletion.",
+  "main": "Discord_bot_Violator.js",
+  "dependencies": {
+    "chokidar": "^2.1.8",
+    "discord.js": "^11.5.1",
+    "follow-redirects": "^1.10.0",
+    "g": "^2.0.1",
+    "jest": "^25.1.0",
+    "lowdb": "^1.0.0",
+    "nodemon": "^1.19.4",
+    "pstree.remy": "^1.1.7",
+    "request": "^2.88.0",
+    "undefined": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "~help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimitar-Pilyakov/Violator.git"
+  },
+  "author": "Dimitar Pilyakov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dimitar-Pilyakov/Violator/issues"
+  },
+  "homepage": "https://github.com/Dimitar-Pilyakov/Violator#readme"
+}

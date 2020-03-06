@@ -1,14 +1,10 @@
-exports.run = (bot, msg, args, db) => {
-  // TODO: Implement reddit API search and all the other shit that comes with it.
-
+exports.run = (bot, prefix, msg, args, db) => {
   //Finds the settings file for future token obtaining.
   const settings = require('./../settings.json');
   //File system import.
   const fs = require('fs');
   //Imports the command information file.
   const commands = JSON.parse(fs.readFileSync('./commands/commands.json', 'utf8'));
-  //Retrieves the prefix from the DB
-  const prefix = db.get(`servers.${msg.guild.id}_prefix`).value();
 
   //Request package to handle our HTTPS requests.
   const request = require('request');
@@ -43,15 +39,14 @@ exports.run = (bot, msg, args, db) => {
     }
   }
 
-  //Deletes the command message so as to avoid chat cluttering, purely cosmetic.
-  msg.delete();
-
   //Checks that args are added to the command call.
   if (args[0] == undefined) {
     msg.channel.send(`Incorrect usage. \`${prefix}${commands['Reddit'].syntax}\``);
     return;
   }
 
+  //Deletes the command message so as to avoid chat cluttering, purely cosmetic.
+  await msg.delete();
   //GET request with options.
   request(options, (err, res, body) => {
     //Checks if there was an error and if the status code is 200(OK).
