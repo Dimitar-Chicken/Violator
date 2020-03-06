@@ -41,7 +41,7 @@ exports.run = (bot, message, db) => {
         //The commands are ran by passing the variable select the {cmd}.js file
         let commandFile = require(`./${cmd}.js`);
         //The stored command file is ran with the function arguments of bot, message and arguments.
-        commandFile.run(bot, message, args, db, roles);
+        commandFile.run(bot, prefix, message, args, db, roles);
     } catch (e) {
         //Error logging
         console.log(e);
