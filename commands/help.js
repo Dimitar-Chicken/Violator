@@ -1,12 +1,10 @@
-exports.run = (bot, msg, args, db) => {
+exports.run = async (bot, prefix, msg, args, db, roles) => {
 
   const Discord = require('discord.js');
   //File system import.
   const fs = require('fs');
   //Imports the command information file.
   const commands = JSON.parse(fs.readFileSync('./commands/commands.json', 'utf8'));
-
-  const { default_prefix } = require('../settings.json');
   
   //The help embed, setColor sets the border color.
   const onlyHelp = new Discord.RichEmbed().setColor(0x664785);
@@ -15,11 +13,6 @@ exports.run = (bot, msg, args, db) => {
   let commandsFound = 0;
   //Singular or plural spelling
   let correctCommandSpelling = "commands";
-  //Retrieves the prefix from the DB
-  const prefix = db.get(`servers.${msg.guild.id}_prefix`).value();
-  if (prefix == undefined) {
-    prefix = default_prefix;
-  }
   //Checks that args are added to the command call.
   if ((args.length > 1 && args[0] != 'server') || args.length > 2) {
     msg.channel.send(`Incorrect usage. \`${prefix}${commands['Help'].syntax}\``);
@@ -81,7 +74,7 @@ exports.run = (bot, msg, args, db) => {
 
     //Chat message to notify user where to find help.
     msg.channel.send('I have sent a help message in Direct Messages.').then(msg => {
-      setTimeout(function () {
+      setTimeout(async function () {
         await msg.delete();
       }, 4500);
     });
