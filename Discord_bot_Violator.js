@@ -11,6 +11,9 @@ db.defaults({
   servers: {}
 }).write();
 
+//serverQueue for songs.
+var queue = new Map();
+
 bot.on('ready', () => {
   console.log(`Launching ${bot.user.tag}...`);
   console.log("Successful launch.\n");
@@ -26,7 +29,7 @@ bot.on('ready', () => {
 bot.on('message', message => {
 
   let commandHandler = require('./commands/commandHandler.js');
-  commandHandler.run(bot, message, db);
+  commandHandler.run(bot, message, db, queue);
 });
 
 bot.login(token);
