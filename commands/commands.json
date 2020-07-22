@@ -59,7 +59,7 @@
   "Ping": {
     "name": "Ping",
     "group": "User",
-    "description": "Pings the bot and returns the delay in milliseconds",
+    "description": "Pings the bot and returns the delay in milliseconds.",
     "syntax": "ping",
     "examples": [
       "ping ┝ Return: pong [x] milliseconds."
@@ -69,12 +69,42 @@
   "Prefix": {
     "name": "Prefix",
     "group": "Admin",
-    "description": "Sets the prefix for the current server",
+    "description": "Sets the prefix for the current server.",
     "syntax": "prefix <symbol> (length no more than 2) or <default> to reset to default. All of the use cases word with the default bot prefix( ~ ) and not just the server prefix.",
     "examples": [
       "prefix ┝ Returns the current server prefix.",
       "prefix default ┝ Resets the server prefix to the default bot prefix.",
       "prefix ! ┝ Changes the currnet server prefix to '!'."
+    ]
+  },
+
+  "Play": {
+    "name": "Prefix",
+    "group": "User",
+    "description": "Begins a song queue and makes the bot connect to a voice channel.",
+    "syntax": "play [youtube.com URL]",
+    "examples": [
+      "play https://www.youtube.com/watch?v=dQw4w9WgXcQ ┝ Adds song to the queue."
+    ]
+  },
+
+  "Stop": {
+    "name": "Stop",
+    "group": "User",
+    "description": "Stops the current queue and leaves the voice channel.",
+    "syntax": "stop",
+    "examples": [
+      "stop ┝ Stops the music."
+    ]
+  },
+
+  "Skip": {
+    "name": "Skip",
+    "group": "User",
+    "description": "Skips to the next song in the queue or leaves the voice channel if no more songs remain.",
+    "syntax": "skip",
+    "examples": [
+      "skip ┝ Skip to the next song in the queue."
     ]
   }
 }
