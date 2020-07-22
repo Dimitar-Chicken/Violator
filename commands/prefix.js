@@ -1,4 +1,4 @@
-exports.run = (bot, msg, args, db, roles) => {
+exports.run = (bot, cmdprefix, msg, args, db, roles) => {
 
   //Finds the settings file for future token obtaining.
   const settings = require('./../settings.json');
@@ -6,8 +6,6 @@ exports.run = (bot, msg, args, db, roles) => {
   const fs = require('fs');
   //Imports the command information file.
   const commands = JSON.parse(fs.readFileSync('./commands/commands.json', 'utf8'));
-  //Retrieves the current prefix from DB
-  var cmdprefix = db.get(`servers.${msg.guild.id}_prefix`).value();
 
   //Checks if the command is 'default'.
   if (args[0] == undefined) {
