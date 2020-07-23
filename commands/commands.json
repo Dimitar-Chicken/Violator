@@ -1,110 +1,119 @@
 {
-  "Help": {
-    "name": "Help",
-    "group": "User",
-    "description": "Display a list of commands. By default the command result is sent to Direct Messages. Using the 'server' key word will make them send in the server instead. Gives more examples when used for specific command/group.",
-    "syntax": "help ['server'] [group OR command]",
-    "examples": [
-      "help user ┝ Sends a Direct Message with the commands in the User group.",
-      "help imgur ┝ Sends a Direct Message with the commands in the imgur command.",
-      "help server ┝ The help message is posted on the server.",
-      "help server user ┝ The result for the user 'group' is posted on the server."
-    ]
+  "Page1": {
+    
+    "Help": {
+      "name": "Help",
+      "group": "User",
+      "description": "Display a list of commands. By default the command result is sent to Direct Messages. Using the 'server' key word will make them send in the server instead. Gives more examples when used for specific command/group.",
+      "syntax": "help ['server'] [group OR command]",
+      "examples": [
+        "help user ┝ Sends a Direct Message with the commands in the User group.",
+        "help imgur ┝ Sends a Direct Message with the commands in the imgur command.",
+        "help server ┝ The help message is posted on the server.",
+        "help server user ┝ The result for the user 'group' is posted on the server."
+      ]
+    },
+  
+    "Prefix": {
+      "name": "Prefix",
+      "group": "Admin",
+      "description": "Sets the prefix for the current server.",
+      "syntax": "prefix <symbol> (length no more than 2) or <default> to reset to default. All of the use cases word with the default bot prefix( ~ ) and not just the server prefix.",
+      "examples": [
+        "prefix ┝ Returns the current server prefix.",
+        "prefix default ┝ Resets the server prefix to the default bot prefix.",
+        "prefix ! ┝ Changes the currnet server prefix to '!'."
+      ]
+    },
+  
+    "Clear": {
+      "name": "Clear",
+      "group": "Admin",
+      "description": "Deletes the requested number of messages.",
+      "syntax": "clear <1 to 100>",
+      "examples": [
+        "clear 10 ┝ Clears 10 chat messages in the current channel, not including the command message."
+      ]
+    },
+  
+    "Ping": {
+      "name": "Ping",
+      "group": "User",
+      "description": "Pings the bot and returns the delay in milliseconds.",
+      "syntax": "ping",
+      "examples": [
+        "ping ┝ Return: pong [x] milliseconds."
+      ]
+    }
+  },
+  
+  "Page2": {
+  
+    "Clap": {
+      "name": "Clap",
+      "group": "User",
+      "description": "Adds the 👏 after every word.",
+      "syntax": "clap [message]",
+      "examples": [
+        "clap Your sentence here ┝ Resulting sentence: 'Your 👏 sentence 👏 here 👏'."
+      ]
+    },
+
+    "Reddit": {
+      "name": "Reddit",
+      "group": "User",
+      "description": "Searches based on the given query using the Reddit API.",
+      "syntax": "reddit ['subreddit' or 'tag'] <keywords>",
+      "examples": [
+        "reddit dank memes ┝ Example of searching for posts with 'dank memes' in the title.",
+        "reddit tag aww ┝ Example of searching for posts tagged with 'aww'.",
+        "reddit subreddit cats cute kitty ┝ Example of searching r/cats for posts containing 'cute kitty' in the title."
+      ]
+    },
+  
+    "Imgur": {
+      "name": "Imgur",
+      "group": "User",
+      "description": "Searches based on the given query using the Imgur API.",
+      "syntax": "imgur ['subreddit' or 'tag'] <keywords>",
+      "examples": [
+        "imgur dank memes ┝ Example of searching for posts with 'dank memes' in the title.",
+        "imgur tag aww ┝ Example of searching for posts tagged with 'aww'.",
+        "imgur subreddit cats cute kitty ┝ Example of searching r/cats for posts containing 'cute kitty' in the title."
+      ]
+    }
   },
 
-  "Clear": {
-    "name": "Clear",
-    "group": "Admin",
-    "description": "Deletes the requested number of messages.",
-    "syntax": "clear <1 to 100>",
-    "examples": [
-      "clear 10 ┝ Clears 10 chat messages in the current channel, not including the command message."
-    ]
-  },
+  "Page3": {
+  
+    "Play": {
+      "name": "Prefix",
+      "group": "User",
+      "description": "Begins a song queue and makes the bot connect to a voice channel.",
+      "syntax": "play [youtube.com URL]",
+      "examples": [
+        "play https://www.youtube.com/watch?v=dQw4w9WgXcQ ┝ Adds song to the queue."
+      ]
+    },
 
-  "Clap": {
-    "name": "Clap",
-    "group": "User",
-    "description": "Adds the 👏 after every word.",
-    "syntax": "clap [message]",
-    "examples": [
-      "clap Your sentence here ┝ Resulting sentence: 'Your 👏 sentence 👏 here 👏'."
-    ]
-  },
-
-  "Imgur": {
-    "name": "Imgur",
-    "group": "User",
-    "description": "Searches based on the given query using the Imgur API.",
-    "syntax": "imgur ['subreddit' or 'tag'] <keywords>",
-    "examples": [
-      "imgur dank memes ┝ Example of searching for posts with 'dank memes' in the title.",
-      "imgur tag aww ┝ Example of searching for posts tagged with 'aww'.",
-      "imgur subreddit cats cute kitty ┝ Example of searching r/cats for posts containing 'cute kitty' in the title."
-    ]
-  },
-
-  "Reddit": {
-    "name": "Reddit",
-    "group": "User",
-    "description": "Searches based on the given query using the Reddit API.",
-    "syntax": "reddit ['subreddit' or 'tag'] <keywords>",
-    "examples": [
-      "reddit dank memes ┝ Example of searching for posts with 'dank memes' in the title.",
-      "reddit tag aww ┝ Example of searching for posts tagged with 'aww'.",
-      "reddit subreddit cats cute kitty ┝ Example of searching r/cats for posts containing 'cute kitty' in the title."
-    ]
-  },
-
-  "Ping": {
-    "name": "Ping",
-    "group": "User",
-    "description": "Pings the bot and returns the delay in milliseconds.",
-    "syntax": "ping",
-    "examples": [
-      "ping ┝ Return: pong [x] milliseconds."
-    ]
-  },
-
-  "Prefix": {
-    "name": "Prefix",
-    "group": "Admin",
-    "description": "Sets the prefix for the current server.",
-    "syntax": "prefix <symbol> (length no more than 2) or <default> to reset to default. All of the use cases word with the default bot prefix( ~ ) and not just the server prefix.",
-    "examples": [
-      "prefix ┝ Returns the current server prefix.",
-      "prefix default ┝ Resets the server prefix to the default bot prefix.",
-      "prefix ! ┝ Changes the currnet server prefix to '!'."
-    ]
-  },
-
-  "Play": {
-    "name": "Prefix",
-    "group": "User",
-    "description": "Begins a song queue and makes the bot connect to a voice channel.",
-    "syntax": "play [youtube.com URL]",
-    "examples": [
-      "play https://www.youtube.com/watch?v=dQw4w9WgXcQ ┝ Adds song to the queue."
-    ]
-  },
-
-  "Stop": {
-    "name": "Stop",
-    "group": "User",
-    "description": "Stops the current queue and leaves the voice channel.",
-    "syntax": "stop",
-    "examples": [
-      "stop ┝ Stops the music."
-    ]
-  },
-
-  "Skip": {
-    "name": "Skip",
-    "group": "User",
-    "description": "Skips to the next song in the queue or leaves the voice channel if no more songs remain.",
-    "syntax": "skip",
-    "examples": [
-      "skip ┝ Skip to the next song in the queue."
-    ]
+    "Stop": {
+      "name": "Stop",
+      "group": "User",
+      "description": "Stops the current queue and leaves the voice channel.",
+      "syntax": "stop",
+      "examples": [
+        "stop ┝ Stops the music."
+      ]
+    },
+  
+    "Skip": {
+      "name": "Skip",
+      "group": "User",
+      "description": "Skips to the next song in the queue or leaves the voice channel if no more songs remain.",
+      "syntax": "skip",
+      "examples": [
+        "skip ┝ Skip to the next song in the queue."
+      ]
+    }
   }
 }
