@@ -14,7 +14,12 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
   var serverQueue = queue.get(msg.guild.id);
 
   if (!voiceChannel){
-    msg.channel.send("You must be in a voice channel to play music.");
+    msg.channel.send("You must be in a voice channel to summon the bot.");
+    return;
+  }
+
+  if(args[0] == undefined){
+    msg.channel.send(`Incorrect usage. \`${prefix}${commands['Page3']['Play'].syntax}\``);
     return;
   }
 

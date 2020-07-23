@@ -14,8 +14,8 @@ exports.run = (bot, prefix, msg, args, db, roles, queue) => {
     const voiceChannel = msg.member.voiceChannel;
     const serverQueue = queue.get(msg.guild.id);
 
-    if (!voiceChannel) {
-        msg.channel.reply("You must be in a voice channel to stop the music.");
+    if (!voiceChannel || msg.guild.voiceConnection.channel.id != voiceChannel.id) {
+        msg.channel.send("You must be in the same voice channel to stop the music.");
         return;
     }
 
