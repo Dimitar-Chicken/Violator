@@ -99,6 +99,16 @@
       ]
     },
 
+    "Queue": {
+      "name": "Queue",
+      "group": "User",
+      "description": "Displays the currently playing song and queue.",
+      "syntax": "queue",
+      "examples": [
+        "queue┝ Displays currently playing and queue if any."
+      ]
+    },
+
     "Stop": {
       "name": "Stop",
       "group": "User",
