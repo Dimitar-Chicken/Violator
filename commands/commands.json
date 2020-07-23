@@ -1,15 +1,18 @@
 {
   "Page1": {
-    
+
     "Help": {
       "name": "Help",
       "group": "User",
       "description": "Display a list of commands. By default the command result is sent to Direct Messages. Using the 'server' key word will make them send in the server instead. Gives more examples when used for specific command/group.",
-      "syntax": "help ['server'] [group OR command]",
+      "syntax": "help [page number] ['server'] [group OR command]",
       "examples": [
+        "help ┝ Sends a Direct Message with the first help page by default.",
+        "help 2 ┝ Sends a Direct Message with the second help page.",
         "help user ┝ Sends a Direct Message with the commands in the User group.",
         "help imgur ┝ Sends a Direct Message with the commands in the imgur command.",
         "help server ┝ The help message is posted on the server.",
+        "help 2 server ┝ The second help page is posted on the server. ",
         "help server user ┝ The result for the user 'group' is posted on the server."
       ]
     },
@@ -87,7 +90,7 @@
   "Page3": {
   
     "Play": {
-      "name": "Prefix",
+      "name": "Play",
       "group": "User",
       "description": "Begins a song queue and makes the bot connect to a voice channel.",
       "syntax": "play [youtube.com URL]",
