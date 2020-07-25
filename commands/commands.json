@@ -95,7 +95,8 @@
       "description": "Begins a song queue and makes the bot connect to a voice channel.",
       "syntax": "play [youtube.com URL]",
       "examples": [
-        "play https://www.youtube.com/watch?v=dQw4w9WgXcQ ┝ Adds song to the queue."
+        "play https://www.youtube.com/watch?v=dQw4w9WgXcQ ┝ Adds song to the queue.",
+        "play https://www.youtube.com/playlist?list=PL3KnTfyhrIlcudeMemKd6rZFGDWyK23vx ┝ Adds songs from the playlist to the queue."
       ]
     },
 

@@ -1,7 +1,7 @@
 exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
 
-  //Finds the settings file for future token obtaining.
-  const settings = require('../settings.json');
+  //YouTube API access token
+  const {youtube_token} = require('./../settings.json');
   //File system import.
   const fs = require('fs');
   //Imports the command information file.
@@ -9,6 +9,8 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
 
   //ytdl package used to download YouTube videos.
   const ytdl = require('ytdl-core');
+  //got package used to make API requests.
+  const got = require('got');
 
   const voiceChannel = msg.member.voiceChannel;
   var serverQueue = queue.get(msg.guild.id);
@@ -23,52 +25,69 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
     return;
   }
 
-  if(!validateYouTubeUrl(args[0])){
-    msg.channel.send("Invalid YouTube URL.");
-    return;
+  switch (validateYouTubeUrl(args[0])) {
+    case "invalid":
+      msg.channel.send("Invalid YouTube URL.");
+      return;
+    
+    case "validVideo":
+      addToQueue(args[0], false);
+      return;
+
+    case "validPlaylist":
+      getVideosFromPlaylist(args[0])
+      return;
+
+    default:
+      msg.channel.send("Invalid YouTube URL.");
+      return;
   }
 
-  //Song info.
-  const songInfo = await ytdl.getInfo(args[0]);
-  const song = {
-    title: songInfo.videoDetails.title,
-    url: songInfo.videoDetails.video_url,
-  };
-
-  //Song queue.
-  if (serverQueue == undefined) {
-    const queueContract = {
-      textChannel: msg.channel,
-      voiceChannel: voiceChannel,
-      connection: null,
-      songs: [],
-      volume: 5,
-      playing: true
+  async function addToQueue(videoUrl, isPlayList) {
+    //Song info.
+    const songInfo = await ytdl.getInfo(videoUrl);
+    const song = {
+      title: songInfo.videoDetails.title,
+      url: songInfo.videoDetails.video_url,
     };
 
-    queue.set(msg.guild.id, queueContract);
+    //Song queue.
+    if (serverQueue == undefined) {
+      const queueContract = {
+        textChannel: msg.channel,
+        voiceChannel: voiceChannel,
+        connection: null,
+        songs: [],
+        volume: 5,
+        playing: true
+      };
 
-    queueContract.songs.push(song);
+      queue.set(msg.guild.id, queueContract);
 
-    serverQueue = queue.get(msg.guild.id);
+      queueContract.songs.push(song);
 
-    try{ 
-      var conn = await voiceChannel.join();
-      queueContract.connection = conn;
+      serverQueue = queue.get(msg.guild.id);
 
-      play(msg, serverQueue.songs[0]);
+      try{ 
+        var conn = await voiceChannel.join();
+        queueContract.connection = conn;
+
+        play(msg, serverQueue.songs[0]);
+      }
+      catch (err) {
+        console.log(err);
+        queue.delete(msg.guild.id);
+        msg.channel.send("Could not add song to queue due to an error. Please kindly yell at \`anoobis#1490\`.");
+        return;
+      }
     }
-    catch (err) {
-      console.log(err);
-      queue.delete(msg.guild.id);
-      msg.channel.send("Could not add song to playlist due to an error. Please kindly yell at \`anoobis#1490\`.");
+    else {
+      serverQueue.songs.push(song);
+      if (!isPlayList) {
+        msg.channel.send(`${song.title} has been added to the queue.`);
+      }
       return;
     }
-  }
-  else {
-    serverQueue.songs.push(song);
-    msg.channel.send(`${song.title} has been added to the queue.`);
-    return;
   }
 
   //Play function
@@ -94,17 +113,45 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
     serverQueue.textChannel.send(`Now playing: **${song.title}**`)
   }
 
-  function validateYouTubeUrl(url)
-  {
+  function validateYouTubeUrl(url) {
     if (url != undefined || url != '') {
-      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-      var match = url.match(regExp);
-      if (match && match[2].length == 11) {
-        return true;
+      var regExpVideo = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      var matchVideo = url.match(regExpVideo);
+
+      var regExpPlaylist = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|playlist\?list=|\&list=|\?list=)([^#\&\?]*).*/;
+      var matchPlaylist = url.match(regExpPlaylist);
+
+      if (matchVideo && matchVideo[2].length == 11) {
+        return "validVideo";
+      }
+      else if (matchPlaylist && matchPlaylist[2].length == 34) {
+        return "validPlaylist";
       }
       else {
-        return false;
+        return "invalid";
       }
+    }
+  }
+
+  async function getVideosFromPlaylist(url, nextPage = '') {
+    var playlistId = url.split("https://www.youtube.com/playlist?list=").pop();
+    const response = await got(`https://www.googleapis.com/youtube/v3/playlistItems?key=${youtube_token}&playlistId=${playlistId}&part=snippet&pageToken=${nextPage}&maxResults=50`);
+    var searchRes = JSON.parse(response.body);
+
+    for (var i = 0; i < searchRes.items.length; i++) {
+      console.log(searchRes.items[i].snippet.position)
+      var videoId = searchRes.items[i].snippet.resourceId.videoId;
+
+      await addToQueue(`https://www.youtube.com/watch?v=${videoId}`, true);
+    }
+    
+    if(searchRes.nextPageToken != undefined) {
+      await getVideosFromPlaylist(url, searchRes.nextPageToken)
+    }
+    else {
+      const titleResponse = await got(`https://www.googleapis.com/youtube/v3/playlists?key=${youtube_token}&id=${playlistId}&part=snippet`);
+      var titleSearchRes = JSON.parse(titleResponse.body);
+      msg.channel.send(`Songs from **${titleSearchRes.items[0].snippet.title}** have been added to the queue.`)
     }
   }
 }
