@@ -139,7 +139,6 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
     var searchRes = JSON.parse(response.body);
 
     for (var i = 0; i < searchRes.items.length; i++) {
-      console.log(searchRes.items[i].snippet.position)
       var videoId = searchRes.items[i].snippet.resourceId.videoId;
 
       await addToQueue(`https://www.youtube.com/watch?v=${videoId}`, true);
