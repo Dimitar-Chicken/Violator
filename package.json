@@ -17,7 +17,6 @@
     "nodemon": "^1.19.4",
     "opusscript": "0.0.7",
     "pstree.remy": "^1.1.7",
-    "request": "^2.88.0",
     "undefined": "^0.1.0",
     "ytdl-core": "^3.1.2"
   },
