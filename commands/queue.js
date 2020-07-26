@@ -21,7 +21,7 @@ exports.run = (bot, prefix, msg, args, db, roles, queue) => {
 
     var queueCopy = [];
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 11; i++) {
         if (serverQueue.songs[i] != undefined) {
             queueCopy[i] = serverQueue.songs[i];
         }
@@ -36,7 +36,7 @@ function embedSender(msg, queueCopy, queueEmbed) {
     //Creates the embed body
 
     var count = 0;
-    
+
     //Sending the currently playing song.
     var nowPlaying = queueCopy.shift();
     msg.channel.send(`__**NOW PLAYING:**__\n${nowPlaying.url}`)
@@ -48,8 +48,7 @@ function embedSender(msg, queueCopy, queueEmbed) {
             queueEmbed.addField(`${count}. ${i.title}`, i.url);
         });
         queueEmbed.setFooter(`Currently showing next ${count} songs in the queue.`);
-        console.log("Queue embed completed.");
+        msg.channel.send(queueEmbed);
+        console.log(`Queue embed sent to ${msg.guild.name}`);
     }
-    msg.channel.send(queueEmbed);
-    console.log(`Queue embed sent to ${msg.guild.name}`);
 }
