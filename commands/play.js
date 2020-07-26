@@ -9,6 +9,8 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
 
     //ytdl package used to download YouTube videos.
     const ytdl = require('ytdl-core');
+    const ytdlDiscord = require('ytdl-core-discord');
+    
     //got package used to make API requests.
     const got = require('got');
 
@@ -91,7 +93,7 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
     }
 
     //Play function
-    function play(message, song) {
+    async function play(message, song) {
         if (!song) {
             serverQueue.voiceChannel.leave();
             queue.delete(message.guild.id);
@@ -99,7 +101,7 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
         }
 
         const dispatcher = serverQueue.connection
-            .playStream(ytdl(song.url), { filter: "audioonly" })
+            .playOpusStream(await ytdlDiscord(song.url), { filter: "audioonly" })
             .on("end", () => {
                 serverQueue.songs.shift();
                 play(message, serverQueue.songs[0]);
