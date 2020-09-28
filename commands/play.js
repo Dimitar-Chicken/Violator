@@ -72,6 +72,9 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
 
             try {
                 var conn = await voiceChannel.join();
+                conn.on("disconnect", () => {
+                    queue.delete(msg.guild.id);
+                });
                 queueContract.connection = conn;
 
                 play(msg, serverQueue.songs[0]);
