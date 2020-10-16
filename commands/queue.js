@@ -47,7 +47,12 @@ function embedSender(msg, queueCopy, queueEmbed) {
             //Field for the song titles
             queueEmbed.addField(`${count}. ${i.title}`, i.url);
         });
-        queueEmbed.setFooter(`Currently showing next ${count} songs in the queue.`);
+        if (queueCopy.length == 1) {
+            queueEmbed.setFooter(`Currently showing next song in the queue.`);
+        }
+        else {
+            queueEmbed.setFooter(`Currently showing next ${count} songs in the queue.`);
+        }
         msg.channel.send(queueEmbed);
         console.log(`Queue embed sent to ${msg.guild.name}`);
     }
