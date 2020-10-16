@@ -19,5 +19,10 @@ exports.run = (bot, prefix, msg, args, db, roles, queue) => {
         return;
     }
 
-    serverQueue.connection.dispatcher.end();
+    try {
+        serverQueue.connection.dispatcher.end();
+    }
+    catch (error) {
+        console.error(error);
+    }
 }

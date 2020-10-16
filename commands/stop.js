@@ -19,6 +19,12 @@ exports.run = (bot, prefix, msg, args, db, roles, queue) => {
         return;
     }
 
-    serverQueue.connection.disconnect();
-    queue.delete(msg.guild.id);
+
+    try {
+        serverQueue.connection.disconnect();
+        queue.delete(msg.guild.id);
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
