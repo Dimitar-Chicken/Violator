@@ -105,11 +105,11 @@ exports.run = async (bot, prefix, msg, args, db, roles, queue) => {
 
         const dispatcher = serverQueue.connection
             .playOpusStream(await ytdlDiscord(song.url), { filter: "audioonly" })
+            .on("error", error => console.error(error))
             .on("end", () => {
                 serverQueue.songs.shift();
                 play(message, serverQueue.songs[0]);
             })
-            .on("error", error => console.error(error))
             .on("finish", () => {
                 serverQueue.connection.disconnect();
                 queue.delete(msg.guild.id);
