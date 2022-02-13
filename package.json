@@ -9,7 +9,7 @@
     "discord.js": "^11.6.4",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
-    "follow-redirects": "^1.12.1",
+    "follow-redirects": "^1.14.8",
     "g": "^2.0.1",
     "got": "^11.5.1",
     "jest": "^25.5.4",
