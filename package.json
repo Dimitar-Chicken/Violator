@@ -4,7 +4,7 @@
   "description": "A Discord bot with various functionality like searching Imgur API and mass message deletion.",
   "main": "Discord_bot_Violator.js",
   "dependencies": {
-    "@discordjs/opus": "^0.3.2",
+    "@discordjs/opus": "^0.8.0",
     "chokidar": "^2.1.8",
     "discord.js": "^11.6.4",
     "ffmpeg": "0.0.4",
